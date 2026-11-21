@@ -1,0 +1,78 @@
+def get_valid_int(prompt):
+    while True:
+        try:
+            value = int(input(prompt))
+            
+            if value < 0:
+                print("Please enter 0 or a positive number")
+            
+            else:
+                return value
+        
+        except ValueError:
+            print("Please enter a whole number!")
+
+def Pomodoro_timer():
+    import time
+    
+    while True:
+        # Request user input
+        
+        welcome = "Welcome, let's study!"
+        
+        print(welcome)
+        
+        hours = get_valid_int("How many hours: ")
+        
+        minutes = get_valid_int("How many min: ")
+        
+        seconds = get_valid_int("How many seconds: ")
+        
+        # punctuation below
+        grammar = "s" if hours != 1 else ""
+        plural = "s" if minutes != 1 else ""
+        gram = "s" if seconds != 1 else ""
+
+        
+        # Confirming user input
+        
+        confirm_time = input(f"Are you sure you want"
+        f" to study for {hours} hour{grammar},"
+        f" {minutes} minute{plural} "
+        f"and {seconds} second{gram}: ").lower()
+        
+        if confirm_time == "no":
+            print("Let's try again then!")
+        
+        elif confirm_time == "yes":
+            print("Starting")
+            break
+        
+        else:
+            print("Sorry I didn't get that.")
+     
+     # Timer begins here
+     
+    total_duration = (hours * 3600) + (minutes * 60) + seconds
+    
+    for i in range(0, total_duration + 1):
+        
+        time.sleep(1)
+        
+        hours = total_duration // 3600
+        
+        remainder = total_duration % 3600
+        
+        minutes = remainder // 60
+        
+        seconds = remainder % 60
+        
+        total_duration = total_duration - 1
+        
+        formatted_time = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+        
+        print(formatted_time, end="\r")
+    
+    print("***Time's up!***")
+    
+Pomodoro_timer()
